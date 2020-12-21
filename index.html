@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="style.css" rel="stylesheet" type="text/css"/>
+    <title>Assignment 1</title>
+</head>
+<body>
+    <div id="element1">
+    </div>
+    <div id="element2">        
+    </div>
+    <script src="./list.js"></script>
+    <script>
+        const students = [
+            {roll:1,name:"Akhilesh Kumar Pandey",email:"pandeyakhilesh5372@gmail.com"},
+            {roll:2,name:"Magnus Carlsen",email:"magnusCarlsen@abc.com"},
+            {roll:3,name:"Vishwanathan Anand",email:"anandvishy@gmail.com"},
+            {roll:4,name:"Peter Leko",email:"peterleko@gmail.com"},
+            {roll:5,name:"Peter Svidler",email:"petersvidler@gmail.com"},
+            {roll:6,name:"Hikaru Nakamura",email:"hikunaka@gmail.com"},
+            {roll:7,name:"Ian Nepominiatchhi",email:"nepotactics@gmail.com"},
+            {roll:8,name:"Judit Polgar",email:"juditpolgar@gmail.com"},
+            {roll:9,name:"MVL",email:"mvl@gmail.com"},
+            {roll:10,name:"Alexander Grischuk",email:"grialex@gmail.com"},
+            {roll:11,name:"Sagar Shah",email:"sgarShah2@gmail.com"},
+            {roll:12,name:"Anish Giri",email:"girianish@gmail.com"},
+            {roll:13,name:"Teimour Radjabov",email:"radjabeingraja@gmail.com"},
+            {roll:14,name:"Soumya",email:"soumyaji@gmail.com"},
+            {roll:15,name:"Vidit Gujrathi",email:"GujVidi@gmail.com"},
+            {roll:16,name:"Gary Kasparov",email:"thegarykasparov@gmail.com"},
+            {roll:17,name:"Goku",email:"goku@gmail.com"},
+            {roll:18,name:"Naruto Uzumaki",email:"narutotheuzumaki@gmail.com"},
+            {roll:19,name:"Sasuke Uchiha",email:"lastUchiha@gmail.com"},
+            {roll:20,name:"Kakashi Hatake",email:"hatakekakashi@gmail.com"},
+            {roll:21,name:"Guy Sensei",email:"senseiguy2@gmail.com"},
+            {roll:22,name:"Gara",email:"gara@gmail.com"},
+            {roll:23,name:"Kurama",email:"theninetail@gmail.com"},
+            {roll:24,name:"Sakura Chan",email:"chanaro@gmail.com"},
+            {roll:25,name:"obito Uchiha",email:"lonelywithoutrin@gmail.com"},
+            {roll:26,name:"ITachi Uchiha",email:"higherthanhokage@gmail.com"},
+            {roll:27,name:"Rin Nohara",email:"nohararin@gmail.com"},
+            {roll:28,name:"Madara Uchiha",email:"uchihamadara@gmail.com"},
+            {roll:29,name:"Ishki Osutsuki",email:"biggestvillain@gmail.com"},
+            {roll:30,name:"Kaguya Osutsuki",email:"motherofsixpaths@gmail.com"},
+            {roll:31,name:"Asuma Sarutobi",email:"asumasarutobi@gmail.com"},
+            {roll:32,name:"Third Hokage",email:"SeniorSarutobi@gmail.com"},
+            {roll:33,name:"Konohamaru Sarutobi",email:"thetrashofalltime@gmail.com"},
+            {roll:34,name:"Hinata Uzumaki",email:"hinatathewife@gmail.com"},
+            {roll:35,name:"Sai",email:"saipainter@gmail.com"},
+            {roll:36,name:"Shikamaru",email:"shikamaruthementalist@gmail.com"},
+            {roll:37,name:"Choji",email:"chozithebigboy@gmail.com"},
+            {roll:38,name:"Iruka Sensei",email:"thestartofwilloffire@gmail.com"},
+            {roll:39,name:"Boruto Uzumaki",email:"theJuniorUzumaki@gmail.com"},
+            {roll:40,name:"Sarada Uchiha",email:"theJuniorUchiha@gmail.com"},
+        ];
+        // List Table
+        let listObj = new ListFunc(divElement,students);
+        listObj.renderObj();
+
+        // List Table Controllers
+
+        // First Button
+        let firstButton = document.createElement("button");
+        firstButton.innerHTML = "<<";
+        firstButton.setAttribute("title","First Page");
+        firstButton.addEventListener("click",()=>{
+            listObj.firstPage();
+            divElement.querySelector("table").remove();
+            listObj.renderObj();
+            div.innerHTML = listObj.currentPage;
+        });
+        divController.appendChild(firstButton);
+
+        // Previous Button
+        let prevButton = document.createElement("button");
+        prevButton.innerHTML = "<";
+        prevButton.setAttribute("title","Previous");
+        prevButton.addEventListener("click",()=>{
+            listObj.prevPage();
+            divElement.querySelector("table").remove();
+            listObj.renderObj();
+            div.innerHTML = listObj.currentPage;
+        });
+        divController.appendChild(prevButton);
+
+        // Current Page
+        let div = document.createElement("div");
+        div.innerHTML = listObj.currentPage;
+        div.setAttribute("class","page-div");
+        div.setAttribute("title","Current");
+        divController.appendChild(div);
+
+        // Next Button
+        let nextButton = document.createElement("button");
+        nextButton.innerHTML = ">";
+        nextButton.setAttribute("title","Next")
+        nextButton.addEventListener("click",()=>{
+            listObj.nextPage();
+            divElement.querySelector("table").remove();
+            listObj.renderObj();
+            div.innerHTML = listObj.currentPage;
+        });
+        divController.appendChild(nextButton);
+
+        //Last Button
+
+        let lastButton = document.createElement("button");
+        lastButton.innerHTML = ">>";
+        lastButton.setAttribute("title","Last Page");
+        lastButton.addEventListener("click",()=>{
+            listObj.lastPage();
+            divElement.querySelector("table").remove();
+            listObj.renderObj();
+            div.innerHTML = listObj.currentPage;
+        });
+        divController.appendChild(lastButton);
+
+        // Rows Limit Input
+        let limitList = document.createElement("select");
+        limitList.setAttribute("class","limit-list");
+        limitList.setAttribute("title","Rows Limit");
+        limitValues.map(function(limitVal){
+            let option = document.createElement("option");
+            option.innerHTML = limitVal;
+            limitList.appendChild(option);
+        });
+        limitList.addEventListener("change",function(){
+            let value = limitList.value;
+            listObj.changeLimit(Number(value));
+            divElement.querySelector("table").remove();
+            listObj.renderObj();
+        });
+        divController.appendChild(limitList);
+    </script>
+</body>
+</html>
